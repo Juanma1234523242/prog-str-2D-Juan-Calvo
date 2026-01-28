@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ControlSwitchJuanCalvo/ControlSwitchJuanCalvo.iml" filepath="$PROJECT_DIR$/ControlSwitchJuanCalvo/ControlSwitchJuanCalvo.iml" />
       <module fileurl="file://$PROJECT_DIR$/prog-str-2D-Juan-Calvo.iml" filepath="$PROJECT_DIR$/prog-str-2D-Juan-Calvo.iml" />
     </modules>
   </component>
