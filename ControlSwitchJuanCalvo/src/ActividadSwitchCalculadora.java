@@ -54,7 +54,7 @@ public class ActividadSwitchCalculadora {
 
             default:
                 resultadoValido = false;
-                System.out.println("Opción no valida");
+                System.out.println("Opcion no valida");
                 break;
         }
 
