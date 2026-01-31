@@ -1,80 +1,86 @@
 import java.util.Scanner;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int opcion;
 
-        int CF = 0, FC = 0, KMMiL = 0, MillKil = 0;
+        int CF = 0;
+        int FC = 0;
+        int KILMILL = 0;
+        int MILLKIL = 0;
         int totalConversiones = 0;
+
+        int opcion;
 
         do {
             System.out.println("Manual de Conversion");
-            System.out.println("1) C a F");
-            System.out.println("2) F a C");
-            System.out.println("3) Km a Millas");
-            System.out.println("4) Millas a Km");
-            System.out.println("5) Salir");
+            System.out.println("1/C a F");
+            System.out.println("2/F a C");
+            System.out.println("3/Km a Millas");
+            System.out.println("4/Millas a Km");
+            System.out.println("5/Salir");
             System.out.print("Elige una opcion (1-5): ");
 
-            while (!scanner.hasNextInt()) {
-                System.out.println("Opcion no valida. Ingresa un número.");
+
+            if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+            } else {
+                System.out.println("Elige una opcion numerica");
                 scanner.next();
-                System.out.print("Elige una opcion (1-5): ");
+                continue;
             }
 
-            opcion = scanner.nextInt();
-
             if (opcion < 1 || opcion > 5) {
-                System.out.println("ingresa un numero de los mostrados.");
+                System.out.println("Opción invalida, intenta de nuevo.");
+                continue;
             }
 
             if (opcion == 5) {
                 break;
             }
 
-            System.out.print("Ingresa el valor a convertir: ");
+            System.out.print("Ingresa el valor que quieras convertir ");
 
-            while (!scanner.hasNextDouble()) {
-                System.out.println("Ingresa un valor numerico");
+            if (!scanner.hasNextDouble()) {
+                System.out.println("Elige un dato numerico");
                 scanner.next();
-                System.out.print("Ingresa el valor a convertir: ");
+                continue;
             }
 
-            double valor = scanner.nextDouble();
+            double numeroA = scanner.nextDouble();
             double resultado = 0;
 
             switch (opcion) {
                 case 1:
-                    resultado = valor * 1.8 + 32;
+                    resultado = numeroA * 1.8 + 32;
                     CF++;
                     break;
                 case 2:
-                    resultado = (valor - 32) / 1.8;
+                    resultado = (numeroA - 32) / 1.8;
                     FC++;
                     break;
                 case 3:
-                    resultado = valor * 0.621371;
-                    KMMiL++;
+                    resultado = numeroA * 0.621371;
+                    KILMILL++;
                     break;
                 case 4:
-                    resultado = valor * 1.60934;
-                    MillKil++;
+                    resultado = numeroA * 1.60934;
+                    MILLKIL++;
                     break;
             }
 
             totalConversiones++;
             System.out.println("Resultado: " + resultado);
 
-        } while (opcion != 5);
+        } while (true);
 
-        System.out.println("contador de usos");
-        System.out.println("Total de conversiones " + totalConversiones);
-        System.out.println("°C a °F " + CF);
-        System.out.println("°F a °C " + FC);
-        System.out.println("Km a Millas " + KMMiL);
-        System.out.println("Millas a Km " + MillKil);
+        System.out.println("Contador de converciones");
+        System.out.println("Total de conversiones: " + totalConversiones);
+        System.out.println("C a F: " + CF);
+        System.out.println("F a C: " + FC);
+        System.out.println("Km a Millas: " + KILMILL);
+        System.out.println("Millas a Km: " + MILLKIL);
 
         scanner.close();
     }
