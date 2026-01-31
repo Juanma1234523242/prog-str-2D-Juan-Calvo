@@ -70,11 +70,11 @@ public class main {
         } while (opcion != 5);
 
         System.out.println("contador de usos");
-        System.out.println("Total de conversiones: " + totalConversiones);
-        System.out.println("°C a °F: " + CF);
-        System.out.println("°F a °C: " + FC);
-        System.out.println("Km a Millas: " + KMMiL);
-        System.out.println("Millas a Km: " + MillKil);
+        System.out.println("Total de conversiones " + totalConversiones);
+        System.out.println("°C a °F " + CF);
+        System.out.println("°F a °C " + FC);
+        System.out.println("Km a Millas " + KMMiL);
+        System.out.println("Millas a Km " + MillKil);
 
         scanner.close();
     }
