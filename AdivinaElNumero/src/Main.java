@@ -1,87 +1,66 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random random = new Random();
 
-        Scanner scanner = new Scanner(System.in);
+        int max = 100;
+        int min = 1;
 
-        int CF = 0;
-        int FC = 0;
-        int KILMILL = 0;
-        int MILLKIL = 0;
-        int totalConversiones = 0;
+        int secreto = random.nextInt(100)+1;
+        int intentos = 0;
+        int intentosNoNumericos = 0;
+        int intentosFueraRango = 0;
+        int limiteIntentos = 7;
+        boolean gano = false;
+        System.out.println(secreto);
+        System.out.println("Adivina el numero secreto (1-100)");
 
-        int opcion;
+        while(intentos<limiteIntentos){
 
-        do {
-            System.out.println("Manual de Conversion");
-            System.out.println("1/C a F");
-            System.out.println("2/F a C");
-            System.out.println("3/Km a Millas");
-            System.out.println("4/Millas a Km");
-            System.out.println("5/Salir");
-            System.out.print("Elige una opcion (1-5): ");
+            int numero = obtenerNumeroValido(sc, "Intento: "+(intentos+1), min,max,intentosNoNumericos,intentosFueraRango );
+            intentos++;
 
-
-            if (scanner.hasNextInt()) {
-                opcion = scanner.nextInt();
-            } else {
-                System.out.println("Ingresa una opcion numerica");
-                scanner.next();
-                continue;
-            }
-
-            if (opcion < 1 || opcion > 5) {
-                System.out.println("Ingresa un numero entre las opciones");
-                continue;
-            }
-
-            if (opcion == 5) {
+            if(numero == secreto){
+                gano = true;
                 break;
+            } else if(numero > secreto){
+                System.out.println("El numero que estas buscando es menor a "+ numero);
+            } else if (numero < secreto) {
+                System.out.println("El numero que estas buscando es mayor a "+ numero);
             }
+        }
 
-            System.out.print("Ingresa el valor a convertir ");
+        if(gano){
+            System.out.println("Ganaste! En el intento: "+intentos);
+        } else{
+            System.out.println("NOOOO PERDISTE :(");
+            System.out.println("El numero secreto era " + secreto + " tan facil...");
 
-            if (!scanner.hasNextDouble()) {
-                System.out.println("Dato no numerico");
-                scanner.next();
-                continue;
+        }
+    }
+
+    public static int obtenerNumeroValido(Scanner sc, String mensaje, int min, int max,  int intentosNoNumericos,  int intentosFueraRango){
+        int valor;
+        while (true){
+            System.out.println(mensaje);
+            if(sc.hasNextInt()){
+                valor = sc.nextInt();
+                if(valor >= min && valor <= max){
+                    return valor;
+                }else{
+                    System.out.println("El valor ingresado esta fuera de rango");
+                    intentosFueraRango++;
+                    System.out.println("Intentos fuera de rango " + intentosFueraRango);
+                }
+            }else{
+                System.out.println("El dato ingresado no es numerico");
+                intentosNoNumericos++;
+                System.out.println("Intentos no numericos: " + intentosNoNumericos);
             }
-
-            double numeroA = scanner.nextDouble();
-            double resultado = 0;
-
-            switch (opcion) {
-                case 1:
-                    resultado = numeroA * 1.8 + 32;
-                    CF++;
-                    break;
-                case 2:
-                    resultado = (numeroA - 32) / 1.8;
-                    FCC++;
-                    break;
-                case 3:
-                    resultado = numeroA * 0.621371;
-                    KILMILL++;
-                    break;
-                case 4:
-                    resultado = numeroA * 1.60934;
-                    MILLKIL++;
-                    break;
-            }
-
-            totalConversiones++;
-            System.out.println("Resultado: " + resultado);
-
-        } while (true);
-
-        System.out.println("contador de converciones solicitados");
-        System.out.println("Total de conversiones: " + totalConversiones);
-        System.out.println("C a F: " + CF);
-        System.out.println("F a C: " + FC);
-        System.out.println("Km a Millas: " + KILMILL);
-        System.out.println("Millas a Km: " + MILLKIL);
-
-        scanner.close();
+            sc.next();
+        }
     }
 }
