@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AlumnosCRUD/AlumnosCRUD.iml" filepath="$PROJECT_DIR$/AlumnosCRUD/AlumnosCRUD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CRUD/CRUD.iml" filepath="$PROJECT_DIR$/CRUD/CRUD.iml" />
       <module fileurl="file://$PROJECT_DIR$/ControlSwitchJuanCalvo/ControlSwitchJuanCalvo.iml" filepath="$PROJECT_DIR$/ControlSwitchJuanCalvo/ControlSwitchJuanCalvo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ControldeCalificaciones/ControldeCalificaciones.iml" filepath="$PROJECT_DIR$/ControldeCalificaciones/ControldeCalificaciones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HerenciaYPoliformism/HerenciaYPoliformism.iml" filepath="$PROJECT_DIR$/HerenciaYPoliformism/HerenciaYPoliformism.iml" />
       <module fileurl="file://$PROJECT_DIR$/MenudeConversion/MenudeConversion.iml" filepath="$PROJECT_DIR$/MenudeConversion/MenudeConversion.iml" />
       <module fileurl="file://$PROJECT_DIR$/prog-str-2D-Juan-Calvo.iml" filepath="$PROJECT_DIR$/prog-str-2D-Juan-Calvo.iml" />
     </modules>
