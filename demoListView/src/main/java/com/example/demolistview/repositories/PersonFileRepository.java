@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class PersonFileRepository {
-    private final Path filePath = Paths.get("data","person.csv");
+    private final Path filePath = Paths.get("data","persons.csv");
 
     private void ensureFileExist()throws IOException {
         if (Files.notExists(filePath)){

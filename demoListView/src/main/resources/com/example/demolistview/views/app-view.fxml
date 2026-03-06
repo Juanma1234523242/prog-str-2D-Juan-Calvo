@@ -3,16 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER_NAME">
-  fx:controller="com.example.demolistView.controller.AppController"
-   xmlms=
+<VBox prefHeight="400.0" prefWidth="600.0"
+  fx:controller="com.example.demolistview.controllers.AppController"
+   xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label prefHeight="18.0" prefWidth="166.0" text="Listado de personas" />
+      <Label prefHeight="18.0" prefWidth="166.0" text="Listado de personas" fx:id="lblMsg" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" text="Recargar" />
          </children></HBox>
-      <ListView prefHeight="200.0" prefWidth="200.0" />
+      <ListView prefHeight="200.0" prefWidth="200.0" fx:id="listView" />
       <Label />
    </children>
 </VBox>
