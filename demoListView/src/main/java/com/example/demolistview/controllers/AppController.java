@@ -13,19 +13,30 @@ import java.util.List;
 
 public class AppController {
     @FXML
-    private ListView <String>ListView;
+    private ListView<String> ListView;
     @FXML
     private Label lblMsg;
 
 
     @FXML
-    private final ObservableList<String> data = FXCollections.checkedObservabeArrayList();
+    private final ObservableList<String> data = FXCollections.observableList();
 
     private PersonService service = new PersonService();
-     private void loadFromFile(){
-         try{
-             List<String> items =service.loadDataforList();
-             data.setAll(Items);
-         }catch (IOException e);
-     }
+
+    @FXML
+    private void initialize() {
+        ListView.setItems(data);
+        loadFromFile();
+
+    }
+
+    private void loadFromFile() {
+        try {
+            List<String> items = service.loadDataforList();
+            data.setAll(items);
+            lblMsg.setText("Datos cargados exitosamente");
+        } catch (IOException e) {
+            lblMsg.setText(e.getMessage());
+        }
+    }
 }
