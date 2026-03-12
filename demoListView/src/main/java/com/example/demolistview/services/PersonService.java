@@ -19,11 +19,30 @@ public class PersonService {
             String[] parts = line.split(",", -1);
             String name = parts[0].trim();
             String correo = parts[1].trim();
+            String edad = parts.length > 2 ? parts[2].trim() : "0";
 
-            result.add(name+"-"+correo);
+            result.add(name + "-" + correo + "-" + edad);
         }
         return result;
+    }
 
+    public void addPerson(String name, String email, int age) throws IOException{
+        validatePerson(name, email, age);
+        String nameNoComa = name.replace(",", "");
+        String emailNoComa = email.replace(",", "");
+        repo.appendNewLine(nameNoComa + "," + emailNoComa + "," + age);
+    }
+
+    private void validatePerson(String name, String email, int age){
+        if (name==null || name.isBlank() || name.length()<3) {
+            throw new IllegalArgumentException("El nombre no cumple con los estandares");
         }
-
+        String em = (email==null)?"": email.trim();
+        if (em.isBlank()|| !em.contains("@") || !em.contains(".")){
+            throw new IllegalArgumentException("El correo es incorrecto");
+        }
+        if (age < 18) {
+            throw new IllegalArgumentException("Solo se aceptan mayores de edad");
+        }
+    }
 }
