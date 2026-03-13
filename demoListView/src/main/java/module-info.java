@@ -1,6 +1,8 @@
 module com.example.demolistview {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jdk.jdi;
+    requires java.desktop;
 
 
     opens com.example.demolistview to javafx.fxml;

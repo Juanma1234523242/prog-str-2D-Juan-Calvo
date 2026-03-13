@@ -4,16 +4,15 @@ import com.example.demolistview.services.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
 public class AppController {
-
     @FXML
     private ListView<String> listView;
     @FXML
@@ -25,56 +24,94 @@ public class AppController {
     @FXML
     private TextField txtAge;
 
-    @FXML
     private final ObservableList<String> data = FXCollections.observableArrayList();
 
     private PersonService service = new PersonService();
 
     @FXML
-    public void initialize() {
+    public void initialize(){ //Se ejecuta al inicio en cuanto se cargue el controller
+        //Inicializar ListView
+
         loadFromFile();
+
+        listView.getSelectionModel().selectedItemProperty().addListener( (obs,old,newValue)->{
+                    loadDataToForm(newValue);
+                }
+
+        );
+
         listView.setItems(data);
     }
 
     @FXML
-    private void onAddPerson() {
+    public void onAddPerson() throws IOException {
+        String name = txtName.getText();
+        String email = txtEmail.getText();
+        String age = txtAge.getText();
+
         try {
-            String name = txtName.getText();
-            String email = txtEmail.getText();
-            int age = Integer.parseInt(txtAge.getText());
-
-            service.addPerson(name, email, age);
-
-            lblMsg.setText("Datos cargados exitosamente");
+            service.addPerson(name,email,age);
+            loadFromFile();
+            lblMsg.setText("Datos cargados Exitosamente ");
             lblMsg.setStyle("-fx-text-fill: green");
-
             txtName.clear();
             txtEmail.clear();
             txtAge.clear();
-
-            loadFromFile();
-
-        } catch (NumberFormatException e) {
-            lblMsg.setText("La edad debe ser un numero");
-            lblMsg.setStyle("-fx-text-fill: red");
-        } catch (IOException e) {
+        }catch (IOException e){
             lblMsg.setText("Hubo un error con el archivo");
             lblMsg.setStyle("-fx-text-fill: red");
-        } catch (IllegalArgumentException ex) {
-            lblMsg.setText(ex.getMessage());
+
+        }catch (IllegalArgumentException ex){
+            lblMsg.setText("Hubo un error con los datos:" + ex.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
         }
     }
 
-    private void loadFromFile() {
+    @FXML
+    public void OnUpdate(){
+        int index = listView.getSelectionModel().getSelectedIndex();
+        String name = txtName.getText();
+        String email = txtEmail.getText();
+        String age = txtAge.getText();
+
         try {
-            List<String> items = service.loadDataforList();
-            data.setAll(items);
-            lblMsg.setText("Datos cargados exitosamente ");
+            service.updatePerson(index,name,email,age);
+            lblMsg.setText("Actualizacion correcta");
             lblMsg.setStyle("-fx-text-fill: green");
-        } catch (IOException e) {
+            txtName.clear();
+            txtEmail.clear();
+            txtAge.clear();
+            loadFromFile();
+        } catch (IOException ex) {
+
+            lblMsg.setText(ex.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        } catch (IllegalArgumentException e){
             lblMsg.setText(e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
         }
+
+
+    }
+    @FXML
+    private void loadFromFile(){
+        try{
+            List<String> items = service.loadDataForList();
+            data.setAll(items);
+            lblMsg.setText("Datos cargados Exitosamente ");
+            lblMsg.setStyle("-fx-text-fill: green");
+        }catch (IOException e){
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+
+    private void loadDataToForm(String item){
+
+        String[] parts = item.split("-");
+        txtName.setText(parts[0]);
+        txtEmail.setText(parts[1]);
+        txtAge.setText(parts[2]);
+
     }
 }
