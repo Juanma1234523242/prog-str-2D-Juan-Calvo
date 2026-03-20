@@ -23,15 +23,15 @@ public class AppController {
     private TextField txtEmail;
     @FXML
     private TextField txtAge;
+    @FXML
+    private TextField Buscar;
 
     private final ObservableList<String> data = FXCollections.observableArrayList();
 
     private PersonService service = new PersonService();
 
     @FXML
-    public void initialize(){ //Se ejecuta al inicio en cuanto se cargue el controller
-        //Inicializar ListView
-
+    public void initialize(){
         loadFromFile();
 
         listView.getSelectionModel().selectedItemProperty().addListener( (obs,old,newValue)->{
@@ -39,6 +39,12 @@ public class AppController {
                 }
 
         );
+
+        Buscar.textProperty().addListener((observable, oldValue, Search) -> {
+            System.out.println("Text field changed from " + oldValue + " to " + Search);
+            loadFromFileSearch(Search);
+
+        });
 
         listView.setItems(data);
     }
@@ -93,6 +99,24 @@ public class AppController {
 
 
     }
+
+    @FXML
+    private void OnDelete(){
+        int index = listView.getSelectionModel().getSelectedIndex();
+        try {
+            service.deletePerson(index);
+            loadFromFile();
+            lblMsg.setText("Persona eliminada exitosamente");
+            lblMsg.setStyle("-fx-text-fill: green");
+            txtName.clear();
+            txtEmail.clear();
+            txtAge.clear();
+        } catch (IOException e) {
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+
     @FXML
     private void loadFromFile(){
         try{
@@ -100,6 +124,18 @@ public class AppController {
             data.setAll(items);
             lblMsg.setText("Datos cargados Exitosamente ");
             lblMsg.setStyle("-fx-text-fill: green");
+        }catch (IOException e){
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+
+    @FXML
+    private void loadFromFileSearch(String search){
+        try{
+            List<String> items = service.loadDataForListSearch(search);
+            data.setAll(items);
+
         }catch (IOException e){
             lblMsg.setText(e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
@@ -114,4 +150,8 @@ public class AppController {
         txtAge.setText(parts[2]);
 
     }
+
+
+
+
 }

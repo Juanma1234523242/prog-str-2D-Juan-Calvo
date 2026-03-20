@@ -28,6 +28,26 @@ public class PersonService {
 
     }
 
+    public List<String> loadDataForListSearch(String search) throws IOException {
+        List<String> lines = repo.readAllLines();
+        List<String> result = new ArrayList<>();
+        for (String line : lines){
+            if (line==null || line.isBlank())continue;
+
+
+            String[] parts = line.split(",", -1);
+            String correo = parts[1].trim();
+            if (!correo.contains(search)) continue;
+            String name = parts[0].trim();
+
+            String edad = parts[2].trim();
+
+            result.add(name+"-"+correo+"-"+edad);
+        }
+        return result;
+
+    }
+
     public void addPerson(String name, String email, String age) throws IOException {
         validatePerson(name,email,age);
         String nameNoComa = name.replace(",","");
@@ -74,5 +94,12 @@ public class PersonService {
         if(edadNum < 18){
             throw new IllegalArgumentException("Solo se aceptan mayores de edad (>=18)");
         }
+    }
+
+    public void deletePerson(int index) throws IOException {
+        List<String> lines = getAllCleanLines();
+        lines.remove(index);
+        repo.appendAllLines(lines);
+
     }
 }
