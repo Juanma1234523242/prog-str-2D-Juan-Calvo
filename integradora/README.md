@@ -1,16 +1,16 @@
 # Directorio de Pacientes - Consultorio Médico (Grupo 2°D)
 
 **Proyecto Integrador: Aplicaciones de Escritorio / POO**
-**Equipo:** [Número de tu equipo]
+**Equipo:7
 
-## 📌 Contexto y Objetivo
+## Contexto y Objetivo
 Este sistema de escritorio está diseñado para administrar el directorio de pacientes de un consultorio pequeño. Permite registrar, consultar, actualizar y eliminar pacientes utilizando **Programación Orientada a Objetos (POO)**.
 
 El objetivo principal es implementar un **CRUD completo con persistencia de datos en un archivo local** (sin base de datos), asegurando que la información se conserve entre ejecuciones.
 
 ---
 
-## ⚙️ Funcionalidades Principales
+## Funcionalidades Principales
 
 ### 1. CRUD y Persistencia
 * **Alta, Consulta y Actualización** de pacientes.
@@ -31,7 +31,7 @@ El objetivo principal es implementar un **CRUD completo con persistencia de dato
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 * **Lenguaje:** Java
 * **Interfaz:** JavaFX (FXML + Controller)
 * **Arquitectura:** POO (Modelo, Servicio/Repositorio)
@@ -40,7 +40,7 @@ El objetivo principal es implementar un **CRUD completo con persistencia de dato
 
 ---
 
-## 🚀 Instrucciones de Ejecución
+## Instrucciones de Ejecución
 
 1. Clona este repositorio:
    ```bash
